@@ -1,13 +1,24 @@
 import { Modal } from './UI/Modal.js';
+//import { Map } from './UI/Map';
 
 class PlaceFinder {
 	constructor() {
 		const addressForm = document.querySelector('form');
 		const locateUserBtn = document.getElementById('locate-btn');
 		
-		locateUserBtn.addEventListener('click', this.locateUserHandler);
-		addressForm.addEventListener('submit', this.findAddressHandler);
+		locateUserBtn.addEventListener('click', this.locateUserHandler.bind(this));
+		addressForm.addEventListener('submit', this.findAddressHandler.bind(this));
 	}
+	
+	
+	// u need google maps api !
+//	selectPlace(coordinates) {
+//		if (this.map) {
+//			this.map.render(coordinates);
+//		} else {
+//			this.map = new Map(coordinates);
+//		}
+//	}
 	
 	locateUserHandler() {
 		if (!navigator.geolocation) {
@@ -25,7 +36,7 @@ class PlaceFinder {
 					lat: successResult.coords.latitude,
 					lng: successResult.coords.longitude
 				};
-				console.log(coordinates);
+				console.log(coordinates); //this.selectPlace(coordinates); change with that
 			},
 			error => {
 				modal.hide();
@@ -38,3 +49,19 @@ class PlaceFinder {
 }
 
 const placeFinder = new PlaceFinder();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
