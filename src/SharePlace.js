@@ -8,11 +8,26 @@ class PlaceFinder {
 		const locateUserBtn = document.getElementById('locate-btn');
 		this.shareBtn = document.getElementById('share-btn');
 		
-		this.shareBtn.addEventListener('click');
+		this.shareBtn.addEventListener('click', this.sharePlaceHandler);
 		locateUserBtn.addEventListener('click', this.locateUserHandler.bind(this));
 		addressForm.addEventListener('submit', this.findAddressHandler.bind(this));
 	}
 	
+	sharePlaceHandler() {
+		if (!navigation.clipboard) {
+			sharedLinkInputElement.select();
+			return;
+		}
+		
+		navigator.clipboard.writeText(sharedLinkInputElement.value)
+//			.then(() => {
+//				alert('Coppied into clipboard');
+//			});
+//			.catch(err => {
+//				console.log(err);
+//				sharedLinkInputElement.select();
+//			});
+	}
 	
 	// u need google maps api !
 //	selectPlace(coordinates, address) {
