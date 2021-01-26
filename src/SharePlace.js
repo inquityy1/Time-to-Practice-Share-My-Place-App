@@ -1,6 +1,6 @@
 import { Modal } from './UI/Modal.js';
-//import { Map } from './UI/Map';
-//import { getCoordsFromAddress, getAddressFromCoords } from './Utility/Location'
+import { Map } from './UI/Map';
+import { getCoordsFromAddress, getAddressFromCoords } from './Utility/Location'
 
 class PlaceFinder {
 	constructor() {
@@ -20,26 +20,26 @@ class PlaceFinder {
 		}
 		
 		navigator.clipboard.writeText(sharedLinkInputElement.value)
-//			.then(() => {
-//				alert('Coppied into clipboard');
-//			});
-//			.catch(err => {
-//				console.log(err);
-//				sharedLinkInputElement.select();
-//			});
+			.then(() => {
+				alert('Coppied into clipboard');
+			});
+			.catch(err => {
+				console.log(err);
+				sharedLinkInputElement.select();
+			});
 	}
 	
 	// u need google maps api !
-//	selectPlace(coordinates, address) {
-//		if (this.map) {
-//			this.map.render(coordinates);
-//		} else {
-//			this.map = new Map(coordinates);
-//		}
-//		this.shareBtn.disabled = false;
-// 		const sharedLinkInputElement = document.getElementById('share-link');
-//		sharedLinkInputElement.value = `${location.origin}/my-place?address=${encodeURI(address)}&lat=${coordinates.lat}&lng=${coordinates.lng}`;
-//	}
+	selectPlace(coordinates, address) {
+		if (this.map) {
+			this.map.render(coordinates);
+		} else {
+			this.map = new Map(coordinates);
+		}
+		this.shareBtn.disabled = false;
+ 		const sharedLinkInputElement = document.getElementById('share-link');
+		sharedLinkInputElement.value = `${location.origin}/my-place?address=${encodeURI(address)}&lat=${coordinates.lat}&lng=${coordinates.lng}`;
+	}
 	
 	locateUserHandler() {
 		if (!navigator.geolocation) {
@@ -57,9 +57,9 @@ class PlaceFinder {
 					lat: successResult.coords.latitude,
 					lng: successResult.coords.longitude
 				};
-	//			const address = await getAddressFromCoords(coordinates);
-	//			modal.hide();
-				console.log(coordinates); //this.selectPlace(coordinates); change with that
+				const address = await getAddressFromCoords(coordinates);
+				modal.hide();
+				this.selectPlace(coordinates); change with that
 			},
 			error => {
 				modal.hide();
